@@ -5,11 +5,20 @@ import java.util.List;
 // List.get(0) is the minimum number
 // pop()    // Pop out the min number
 // insert() // Insert a new number
-public class MinHeap {
+public class Heap {
     List<Integer> storage;
-
-    public MinHeap() {
+    String heapType;
+    public Heap(String type) {
         this.storage = new ArrayList<>();
+        this.heapType = type;
+    }
+
+    // When return true, it means we need to swap
+    public boolean valueCompare(int parentIndex, int childIndex) {
+        if(heapType.equals("min")) {
+            return storage.get(parentIndex) > storage.get(childIndex);
+        }
+        return storage.get(parentIndex) < storage.get(childIndex);
     }
 
     // Insert:
@@ -31,6 +40,7 @@ public class MinHeap {
 
         swap(0, storage.size()-1);
         int result = storage.get(storage.size()-1);
+
         storage.remove(storage.size()-1);
         bubbleDown(0);
 
@@ -42,7 +52,7 @@ public class MinHeap {
     // Keep doing until there is no more child or current value is smaller than its children
     public void bubbleDown(int pIndex) {
         int cIndex = getChild(pIndex);
-        while(storage.get(pIndex) > storage.get(cIndex)) {
+        while(valueCompare(pIndex, cIndex)) {
             swap(pIndex, cIndex);
             pIndex = cIndex;
             cIndex = getChild(pIndex);
@@ -62,7 +72,7 @@ public class MinHeap {
             return cLeft;
         }
 
-        return storage.get(cLeft) <= storage.get(cRight) ? cLeft : cRight;
+        return valueCompare(cLeft, cRight) ? cRight : cLeft;
     }
 
     // Get the parent index
@@ -70,7 +80,7 @@ public class MinHeap {
     // Keep doing until there is no more parent or parent value is smaller
     public void bubbleUp(int cIndex) {
         int pIndex = getParent(cIndex);
-        while(pIndex >= 0 && storage.get(cIndex) < storage.get(pIndex)) {
+        while(valueCompare(pIndex, cIndex)) {
             swap(pIndex, cIndex);
             cIndex = pIndex;
             pIndex = getParent(cIndex);

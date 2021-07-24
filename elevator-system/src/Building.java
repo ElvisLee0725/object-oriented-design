@@ -9,7 +9,7 @@ public class Building {
         this.elevatorList = new ArrayList<>();
         this.floorList = new ArrayList<>();
         for(int i = 1; i <= numOfElevators; i++) {
-            elevatorList.add(new Elevator(i));
+            elevatorList.add(new Elevator(i, numOfFloors));
         }
 
         for(int i = 1; i <= numOfFloors; i++) {

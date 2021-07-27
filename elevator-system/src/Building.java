@@ -16,4 +16,27 @@ public class Building {
             floorList.add(new Floor(i));
         }
     }
+
+    // Return the id of the elevator
+    public Integer selectElevator(int floorId) {
+        Integer elevatorId = null;
+        for(Elevator elevator : elevatorList) {
+            for(Button button : elevator.buttonList) {
+                if(!button.isPressed()) {
+                    button.setPressed(true);
+                    elevatorId = elevator.getId();
+                }
+            }
+        }
+        return elevatorId;
+    }
+
+    public void cancelElevator(int elevatorId, int floorId) {
+
+    }
+
+    public void moveToFirst(int elevatorId) {
+
+    }
+
 }

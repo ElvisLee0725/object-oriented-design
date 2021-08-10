@@ -15,7 +15,7 @@ public class Receipt {
             double taxRate = item.getTaxRate();
             beforeTaxSum = beforeTaxSum.add(BigDecimal.valueOf(price));
 
-            BigDecimal salePrice = BigDecimal.valueOf(price).add(BigDecimal.valueOf(calcTax(price, taxRate))).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal salePrice = BigDecimal.valueOf(price).add(BigDecimal.valueOf(calculateTax(price, taxRate))).setScale(2, RoundingMode.HALF_UP);
             totalPrice = totalPrice.add(salePrice);
 
             System.out.println("1 " + name + ": " + salePrice);
@@ -26,7 +26,7 @@ public class Receipt {
         System.out.println("Total: " + totalPrice);
     }
 
-    public double calcTax(double price, double taxRate) {
+    public double calculateTax(double price, double taxRate) {
         return Math.round(price * taxRate * 20.0) / 20.0;
     }
 }

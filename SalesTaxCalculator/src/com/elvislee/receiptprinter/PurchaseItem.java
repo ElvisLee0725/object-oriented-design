@@ -23,7 +23,7 @@ public class PurchaseItem {
     }
 
     public double setTaxRate() {
-        double rate = 0.00;
+        double rate = 0.0;
         if(!isBook && !isFood && !isMedical) {
             rate += BASIC_SALES_TAX;
         }
